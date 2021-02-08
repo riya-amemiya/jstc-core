@@ -1,10 +1,9 @@
 import acron from "../../type/type"
 export const Out = {
-    clean: (): acron.OUT =>
-    {
-        return {
-            code: "",
-            ast: {
+    clean: (
+        {
+            code = "",
+            ast = {
                 Function: [ {
                     name: "",
                     argument: "",
@@ -12,7 +11,7 @@ export const Out = {
                     return: ""
                 } ]
             },
-            cash: {
+            cash = {
                 code: "",
                 return: "",
                 Identifier: [
@@ -21,15 +20,20 @@ export const Out = {
                         to: "",
                         value: "",
                         num: 0
-                    } ],
+                    }
+                ],
                 Function: ""
             },
-            not: [ {
+            not = [ {
                 name: "",
                 num: 0
             } ]
-        }
-    },
+        } ): acron.OUT => ( {
+            code: code,
+            ast: ast,
+            cash: cash,
+            not: not
+        } ),
     cleanCash: ( out: acron.OUT ): acron.OUTCASH =>
     {
         return { code: "", return: "", Identifier: out.cash.Identifier, Function: out.cash.Function }

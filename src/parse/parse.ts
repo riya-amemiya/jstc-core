@@ -65,7 +65,8 @@ export default function parse (
             out.code += variable( code, out, conversion.Variable ).cash.code
         } else if ( code.type === "IfStatement" )
         {
-            out = IF( code, mode, out, { IF: conversion.IF } )
+            out.cash.code = ""
+            out.code += IF( code, mode, out, { IF: conversion.IF } ).cash.code
 
         }
     }

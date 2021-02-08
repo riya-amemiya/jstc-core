@@ -86,7 +86,7 @@ export default (
                         }
                         if ( argument?.type === "Identifier" )
                         {
-                            if ( out.cash.Identifier.findIndex( ( n ) => n.name === argument.name ) !== -1 )
+                            if ( out.cash.Identifier.findIndex( n => n.name === argument.name ) !== -1 )
                             {
                                 if ( out.cash.Identifier.findIndex( n => n.to === argument.name ) === -1 )
                                 {
@@ -100,7 +100,7 @@ export default (
                             }
                             else
                             {
-                                out.code += conversion.Identifier( argument.raw )
+                                out.code += conversion.Identifier( argument.name )
                                 // out.cash.Identifier.push( { name: `_${ argument.name }`, to: `_${ argument.name }`, value: String( argument.value ), num: 0 } )
                                 // out.code += conversion.Identifier( `_${ argument.name }` )
                             }

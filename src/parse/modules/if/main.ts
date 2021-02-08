@@ -4,11 +4,11 @@ export default ( code: acorn.Body3, mode: string, out: acorn.OUT, conversion: { 
 {
     let _argument = {
         BinaryExpression: "",
-        out: Out.clean()
+        out: Out.clean( { cash: Out.cleanCash( out ) } )
     }
     const Identifier = ( code: acorn.Left | acorn.Right ) =>
     {
-        if ( out.cash.Identifier.findIndex( ( n ) => n.name === code.name ) !== -1 )
+        if ( out.cash.Identifier.findIndex( n => n.name === code.name ) !== -1 )
         {
             if ( out.cash.Identifier.findIndex( n => n.to === code.name ) === -1 )
             {
@@ -53,6 +53,6 @@ export default ( code: acorn.Body3, mode: string, out: acorn.OUT, conversion: { 
             }, mode )
         }
     }
-    out.code += conversion.IF( [ _argument.BinaryExpression, _argument.out.code ] )
+    out.cash.code += conversion.IF( [ _argument.BinaryExpression, _argument.out.code ] )
     return out
 }
