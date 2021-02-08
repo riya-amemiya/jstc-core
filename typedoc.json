@@ -1,0 +1,8 @@
+{
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "out": "./out",
+    "gaID": "G-J156R287FT",
+    "gaSite": "JSTC",
+    "hideGenerator": true
+}
