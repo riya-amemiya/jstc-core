@@ -1,6 +1,6 @@
 {
     "name": "@jstc/core",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "",
     "main": "build_core/index.js",
     "types": "build_core/index.d.ts",
