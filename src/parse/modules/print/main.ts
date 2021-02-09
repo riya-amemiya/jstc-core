@@ -44,7 +44,6 @@ export default (
                 }
             }
             out.cash.code = ""
-
             for ( const c of code.expression.arguments )
             {
                 out.cash.code += `${ c.raw },`
@@ -111,9 +110,16 @@ export default (
                         }
                         if ( argument?.type === "BinaryExpression" )
                         {
+                            let B: any[] = [ {} ]
                             if ( argument?.left.type === "BinaryExpression" )
                             {
-                                //console.log(JSON.stringify(argument.left));
+                                for ( const d of Object.entries( argument?.left ).flat() )
+                                {
+                                    if ( typeof d === "object" )
+                                    {
+                                        B.push( d )
+                                    }
+                                }
                             }
                             else if ( argument?.right.type === "BinaryExpression" )
                             {
