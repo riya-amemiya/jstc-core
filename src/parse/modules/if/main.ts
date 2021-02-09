@@ -6,7 +6,7 @@ export default ( code: acorn.Body3, mode: string, out: acorn.OUT, conversion: { 
         BinaryExpression: "",
         out: Out.clean( { cash: Out.cleanCash( out ) } )
     }
-    const Identifier = ( code: acorn.Left | acorn.Right ) =>
+    const Identifier = ( code: acorn.Left | acorn.Right ): string =>
     {
         if ( out.cash.Identifier.findIndex( n => n.name === code.name ) !== -1 )
         {
