@@ -10,6 +10,12 @@ declare namespace acorn
         ast: {
             Function: ASTFUNCTION[]
         }
+        mode: string
+        option: OUTOPTION
+    }
+    interface OUTOPTION
+    {
+        optimisation: boolean
     }
     interface OUTCASH
     {
@@ -243,7 +249,7 @@ declare namespace acorn
         type: string;
         start: number;
         end: number;
-        value: number;
+        value: string;
         raw: string;
         arguments: Argument[]
         left: Argument,

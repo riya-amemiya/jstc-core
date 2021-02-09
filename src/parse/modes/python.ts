@@ -5,9 +5,9 @@ import { parse, Out } from "../.."
  * @param {acorn.Node} codes
  * @returns {acorn.OUT} 変換結果を出力
  */
-export default function python ( codes: acorn.Node, mode: string ): acorn.OUT
+export default function python ( codes: acorn.Node, mode: string, option: acorn.OUTOPTION = { optimisation: false } ): acorn.OUT
 {
-    let out: acorn.OUT = Out.clean( {} );
+    let out: acorn.OUT = Out.clean( { mode, option } );
     return (
         parse( {
             codes, out, conversion: {
@@ -31,7 +31,7 @@ export default function python ( codes: acorn.Node, mode: string ): acorn.OUT
                 {
                     return `if (${ data[ 0 ] }): ${ data[ 1 ] }\n`;
                 }
-            }, mode
+            }
         } )
     )
 }

@@ -24,13 +24,16 @@ export default ( c: acorn.Body | acorn.Body3, out: acorn.OUT, conversion: { Bina
     {
         t.name = `${ c.expression.arguments[ 0 ].left?.value }`
     }
-    walk?.full( c, ( node: acorn.Argument ) =>
+    walk?.full( c, ( node: acorn.Argument ): void =>
     {
-
         if ( node.type === "BinaryExpression" )
         {
             if ( node.left.type === "BinaryExpression" )
             {
+                function hasLiteral ( d: acorn.Argument | acorn.Left | acorn.Right | acorn.Id ): boolean
+                {
+                    return d[ "type" ] === "Literal" && Number( d[ "value" ] ) !== NaN;
+                }
                 if ( node.left.left.type !== 'BinaryExpression' )
                 {
                     let left: string | number = node.left.left.value
@@ -38,23 +41,63 @@ export default ( c: acorn.Body | acorn.Body3, out: acorn.OUT, conversion: { Bina
                     if ( node.left.left.type === "Identifie" )
                     {
                         left = node.left.left.name
-                    } else if ( node.left.right.type === "Identifie" )
-                    {
-                        right = node.left.right.name
                     }
-                    t.name += `${ left }${ node.left.operator }${ right }`
-                } else
-                {
-                    let right: string | number = node.left.right.value
                     if ( node.left.right.type === "Identifie" )
                     {
                         right = node.left.right.name
                     }
-                    t.name += `${ node.left.operator }${ right }`
+                    if ( out.option.optimisation )
+                    {
+                        left = 0
+                        right = ""
+                        for ( const d of [ node.left.left, node.left.right, c.expression.arguments[ 0 ].left, c.expression.arguments[ 0 ].right ].filter( n => hasLiteral( n ) === true ) )
+                        {
+                            left = Number( left ) + Number( d.value )
+                        }
+                        for ( const d of [ node.left.left, node.left.right, c.expression.arguments[ 0 ].left, c.expression.arguments[ 0 ].right ].filter( n => hasLiteral( n ) === false ) )
+                        {
+                            right += `+${ d.name }`
+                        }
+                        if ( right )
+                        {
+                            t.name += left
+                        } else
+                        {
+                            t.raw += `${ node.left.operator }${ right }`
+                        }
+                    } else
+                    {
+                        t.name += `${ left }${ node.left.operator }${ right }`
+                    }
+                } else
+                {
+                    let right: string | number = node.left.right.value
+                    if ( node.left.right.type === "Identifier" )
+                    {
+                        right = node.left.right.name
+                    }
+                    if ( out.option.optimisation )
+                    {
+                        if ( hasLiteral( node.left.right ) )
+                        {
+                            t.name = String( Number( t.name ) + Number( right ) )
+                        } else
+                        {
+                            t.raw += `${ node.left.operator }${ right }`
+                        }
+                    } else
+                    {
+                        t.name += `${ node.left.operator }${ right }`
+                    }
                 }
             }
         }
     } )
+    if ( Number( t.raw[ 0 ] ) !== NaN )
+    {
+        t.name = String( Number( t.name ) + Number( t.raw[ 0 ] ) )
+        t.raw = t.raw.slice( t.raw.search( /[(+|-|*|%|\/)]/ ) + 1 )
+    }
     out.cash.code += conversion.BinaryExpression( [ t.name, c.expression.arguments[ 0 ].operator, t.raw ] )
     return (
         out

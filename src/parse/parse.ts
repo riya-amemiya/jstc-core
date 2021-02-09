@@ -6,7 +6,7 @@ import { print, variable, Function, IF } from ".."
  */
 
 export default function parse (
-    { codes, out, conversion, mode }: {
+    { codes, out, conversion }: {
         codes: acorn.Node; out: acorn.OUT; conversion: {
             Function: {
                 Literal: ( data: string ) => string
@@ -31,7 +31,7 @@ export default function parse (
                 }
             }
             IF: ( data: string[] ) => string
-        }; mode: string
+        };
     } ): acorn.OUT
 {
     for ( const code of codes.body )
@@ -45,7 +45,7 @@ export default function parse (
     {
         if ( code.type === "ExpressionStatement" )
         {
-            out = print( code, out, conversion.Print, mode )
+            out = print( code, out, conversion.Print )
         }
         else if ( code.type === "VariableDeclaration" )
         {
@@ -54,7 +54,7 @@ export default function parse (
         } else if ( code.type === "IfStatement" )
         {
             out.cash.code = ""
-            out.code += IF( code, mode, out, { IF: conversion.IF } ).cash.code
+            out.code += IF( code, out, { IF: conversion.IF } ).cash.code
 
         }
     }

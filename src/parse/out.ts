@@ -36,12 +36,18 @@ export const Out = {
             not = [ {
                 name: "",
                 num: 0
-            } ]
+            } ],
+            mode = "",
+            option = {
+                optimisation: false
+            }
         } ): acron.OUT => ( {
-            code: code,
-            ast: ast,
-            cash: cash,
-            not: not
+            code,
+            ast,
+            cash,
+            not,
+            mode,
+            option
         } ),
     /**
      *
