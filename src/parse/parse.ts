@@ -2,7 +2,6 @@ import acorn from "../../type/type"
 import { print, variable, Function, IF } from ".."
 /**
  * @module python
- * @param {acorn.Node} codes
  * @returns {acorn.OUT} 変換結果を出力
  */
 export default function parse (

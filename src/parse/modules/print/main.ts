@@ -110,16 +110,10 @@ export default (
                         }
                         if ( argument?.type === "BinaryExpression" )
                         {
-                            let B: any[] = [ {} ]
+                            console.log( Object.entries( argument?.left ) );
+
                             if ( argument?.left.type === "BinaryExpression" )
                             {
-                                for ( const d of Object.entries( argument?.left ).flat() )
-                                {
-                                    if ( typeof d === "object" )
-                                    {
-                                        B.push( d )
-                                    }
-                                }
                             }
                             else if ( argument?.right.type === "BinaryExpression" )
                             {
