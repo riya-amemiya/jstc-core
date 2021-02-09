@@ -21,6 +21,7 @@ export default function parse (
                 Literal: ( data: string ) => string
                 FunIdentifier: ( data: string[] ) => string
                 Identifier: ( data: string ) => string
+                BinaryExpression: ( data: string[] ) => string
             }
             Variable: {
                 Kind: {

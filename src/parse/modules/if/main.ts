@@ -49,7 +49,8 @@ export default ( code: acorn.Body3, mode: string, out: acorn.OUT, conversion: { 
             _argument.out = print( c, _argument.out, {
                 Literal: ( data: string ): string => `print(${ data });`,
                 FunIdentifier: ( data: string[] ): string => `print(${ data[ 0 ] }(${ data[ 1 ] }));`,
-                Identifier: ( data: string ): string => `print(${ data });`
+                Identifier: ( data: string ): string => `print(${ data });`,
+                BinaryExpression: ( data: string[] ): string => `print(${ data[ 0 ] }${ data[ 1 ] }${ data[ 2 ] });`
             }, mode )
         }
     }

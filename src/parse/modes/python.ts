@@ -21,7 +21,8 @@ export default function python ( codes: acorn.Node, mode: string ): acorn.OUT
                 Print: {
                     Literal: ( data: string ): string => `print(${ data })\n`,
                     FunIdentifier: ( data: string[] ): string => `print(${ data[ 0 ] }(${ data[ 1 ] }))\n`,
-                    Identifier: ( data: string ): string => `print(${ data })\n`
+                    Identifier: ( data: string ): string => `print(${ data })\n`,
+                    BinaryExpression: ( data: string[] ): string => `print(${ data[ 0 ] }${ data[ 1 ] }${ data[ 2 ] })\n`
                 },
                 Variable: {
                     Kind: { let: ( data: string[] ): string => `${ data[ 0 ] }=${ data[ 1 ] }\n`, const: ( data: string[] ): string => `${ data[ 0 ] }=${ data[ 1 ] }\n` }

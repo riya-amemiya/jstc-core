@@ -10,6 +10,23 @@ export default ( code: acorn.Body3 | acorn.Body, out: acorn.OUT, conversion: { K
         {
             raw = code.declarations[ 0 ].init.raw
         }
+        if ( code.declarations[ 0 ].init.type == "Identifier" )
+        {
+            if ( out.cash.Identifier.findIndex( n => n.name === code.declarations[ 0 ].init.name ) !== -1 )
+            {
+                if ( out.cash.Identifier.findIndex( n => n.to === code.declarations[ 0 ].init.name ) === -1 )
+                {
+                    raw = code.declarations[ 0 ].init.name.toUpperCase()
+                }
+                else
+                {
+                    raw = `_${ code.declarations[ 0 ].init.name.toUpperCase() }`
+                }
+            } else
+            {
+                raw = code.declarations[ 0 ].init.name
+            }
+        }
         if ( code.declarations[ 0 ].init.type == "CallExpression" )
         {
             raw = code.declarations[ 0 ].init.callee.name + "("

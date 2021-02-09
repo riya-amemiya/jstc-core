@@ -1,6 +1,7 @@
 import acorn from "../../../../type/type"
 import chalk from "chalk"
 import { Out } from '../../..';
+import Binary from "../Binary/main"
 /**
  * @module print
  * @param code
@@ -12,7 +13,8 @@ export default (
     conversion: {
         Literal: ( data: string ) => string,
         FunIdentifier: ( data: string[] ) => string,
-        Identifier: ( data: string ) => string
+        Identifier: ( data: string ) => string,
+        BinaryExpression: ( data: string[] ) => string
     },
     mode: string
 ): acorn.OUT =>
@@ -32,11 +34,7 @@ export default (
                         out = Out.not( out, { name: code.expression.callee.name, num: 0 } )
                         console.log( chalk.red( `警告:${ code.expression.callee.name }は宣言されていません!` ) );
                         out.not[ out.not.findIndex( n => n.name === code.expression.callee.name ) ].num++
-                        if ( mode == "python" )
-                        {
-                            comment = `#警告:${ code.expression.callee.name }は宣言されていません!`
-                        }
-                        else if ( mode == "ruby" )
+                        if ( mode == "python" || mode == "ruby" )
                         {
                             comment = `#警告:${ code.expression.callee.name }は宣言されていません!`
                         }
@@ -110,14 +108,9 @@ export default (
                         }
                         if ( argument?.type === "BinaryExpression" )
                         {
-                            console.log( Object.entries( argument?.left ) );
-
-                            if ( argument?.left.type === "BinaryExpression" )
-                            {
-                            }
-                            else if ( argument?.right.type === "BinaryExpression" )
-                            {
-                            }
+                            let a = Out.clean( { cash: Out.cleanCash( out ) } )
+                            Binary( code, a, { BinaryExpression: conversion.BinaryExpression } )
+                            out.code += a.cash.code
                         }
                     }
                 }
