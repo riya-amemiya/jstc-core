@@ -254,6 +254,7 @@ declare namespace acorn
         properties: PROPERTIES[]
         object: Object2;
         property: Property;
+        operator: string;
     }
     interface PROPERTIES
     {

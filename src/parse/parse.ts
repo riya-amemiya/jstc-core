@@ -1,8 +1,7 @@
 import acorn from "../../type/type"
 import { print, variable, Function, IF } from ".."
 /**
- * @module python
- * @param {acorn.Node} codes
+ * @module parse
  * @returns {acorn.OUT} 変換結果を出力
  */
 export default function parse (
@@ -22,6 +21,7 @@ export default function parse (
                 Literal: ( data: string ) => string
                 FunIdentifier: ( data: string[] ) => string
                 Identifier: ( data: string ) => string
+                BinaryExpression: ( data: string[] ) => string
             }
             Variable: {
                 Kind: {

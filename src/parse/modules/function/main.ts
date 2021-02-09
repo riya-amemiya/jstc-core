@@ -60,7 +60,7 @@ export default (
                             {
                                 ( async () =>
                                 {
-                                    const BinaryExpression = await import( "./BinaryExpression" )
+                                    const BinaryExpression = await import( "../Binary/main" )
                                     BinaryExpression.default( c, out, { BinaryExpression: conversion.BinaryExpression } )
                                 } )()
                             } else if ( c.expression.arguments[ 0 ].type === "Identifier" )

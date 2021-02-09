@@ -1,7 +1,7 @@
 node_modules
 src
 babel
-build/
+build_core/
 demo
 jstc_build/
 .vscode
@@ -11,3 +11,4 @@ typedoc.json
 tsconfig.json
 .babelrc
 min
+tsconfig.tsbuildinfo

@@ -33,6 +33,9 @@
             }
         ],
         [
+            "minify-builtins"
+        ],
+        [
             "transform-inline-consecutive-adds"
         ],
         [
@@ -64,6 +67,19 @@
         ],
         [
             "@babel/plugin-proposal-optional-chaining"
+        ],
+        [
+            "@babel/plugin-transform-object-super"
+        ],
+        [
+            "@babel/plugin-transform-for-of"
+        ],
+        [
+            "@babel/plugin-transform-spread",
+            {
+                "loose": true,
+                "useBuiltIns": true
+            }
         ]
     ]
 }
