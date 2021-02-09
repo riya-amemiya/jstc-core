@@ -32,7 +32,7 @@ export default ( c: acorn.Body | acorn.Body3, out: acorn.OUT, conversion: { Bina
             {
                 function hasLiteral ( d: acorn.Argument | acorn.Left | acorn.Right | acorn.Id ): boolean
                 {
-                    return d[ "type" ] === "Literal" && Number( d[ "value" ] ) !== NaN;
+                    return d[ "type" ] === "Literal" && !isNaN( Number( d[ "value" ] ) );
                 }
                 if ( node.left.left.type !== 'BinaryExpression' )
                 {
@@ -93,7 +93,7 @@ export default ( c: acorn.Body | acorn.Body3, out: acorn.OUT, conversion: { Bina
             }
         }
     } )
-    if ( Number( t.raw[ 0 ] ) !== NaN )
+    if ( Number( t.raw[ 0 ] ) !== NaN && !isNaN( Number( t.name ) ) )
     {
         t.name = String( Number( t.name ) + Number( t.raw[ 0 ] ) )
         t.raw = t.raw.slice( t.raw.search( /[(+|-|*|%|\/)]/ ) + 1 )
