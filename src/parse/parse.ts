@@ -1,7 +1,7 @@
 import acorn from "../../type/type"
 import { print, variable, Function, IF } from ".."
 /**
- * @module python
+ * @module parse
  * @returns {acorn.OUT} 変換結果を出力
  */
 export default function parse (
