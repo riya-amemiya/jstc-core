@@ -5,7 +5,7 @@ const walk = require( "acorn-walk" )
  * @param c
  * @param out
  */
-export default ( c: acorn.Body | acorn.Body3, out: acorn.OUT, conversion: { BinaryExpression: ( data: string[] ) => string } ): acorn.OUT =>
+export default ( c: acorn.Body | acorn.Body3, out: acorn.OUT, conversion: { BinaryExpression: ( data: string[] ) => string } ) =>
 {
     let t = { name: "", raw: "" };
     if ( c.expression.arguments[ 0 ].left.type === "Identifier" )
@@ -99,7 +99,6 @@ export default ( c: acorn.Body | acorn.Body3, out: acorn.OUT, conversion: { Bina
         t.raw = t.raw.slice( t.raw.search( /[(+|-|*|%|\/)]/ ) + 1 )
     }
     out.cash.code += conversion.BinaryExpression( [ t.name, c.expression.arguments[ 0 ].operator, t.raw ] )
-    return (
-        out
-    );
+    const Binary = [ t.name, c.expression.arguments[ 0 ].operator, t.raw ]
+    return { out, Binary }
 }

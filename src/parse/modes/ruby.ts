@@ -30,6 +30,10 @@ export default function ruby ( codes: acorn.Node, mode: string, option: acorn.OU
                 IF: ( data: string[] ) =>
                 {
                     return `if (${ data[ 0 ] }) ${ data[ 1 ] } end\n`;
+                },
+                For: ( data ) =>
+                {
+                    return data[ 2 ]
                 }
             }
         } )

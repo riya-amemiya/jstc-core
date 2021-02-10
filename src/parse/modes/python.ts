@@ -30,6 +30,12 @@ export default function python ( codes: acorn.Node, mode: string, option: acorn.
                 IF: ( data: string[] ) =>
                 {
                     return `if (${ data[ 0 ] }): ${ data[ 1 ] }\n`;
+                },
+                For: ( data ) =>
+                {
+                    console.log( data );
+
+                    return `for ${ data[ 0 ][ 0 ] } in range(${ data[ 1 ][ 1 ] }):\n    if(${ data[ 0 ][ 0 ] }+${ data[ 0 ][ 1 ] }${ data[ 1 ][ 2 ] }${ data[ 1 ][ 1 ] }):\n        print(${ data[ 0 ][ 0 ] }+${ data[ 0 ][ 1 ] });\n`
                 }
             }
         } )

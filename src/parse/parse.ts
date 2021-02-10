@@ -1,5 +1,5 @@
 import acorn from "../../type/type"
-import { print, variable, Function, IF } from ".."
+import { print, variable, Function, IF, Out, For } from ".."
 /**
  * @module parse
  * @returns {acorn.OUT} 変換結果を出力
@@ -31,6 +31,7 @@ export default function parse (
                 }
             }
             IF: ( data: string[] ) => string
+            For: ( data: [ [ string, string ], [ string, string, string ], string ] ) => string
         };
     } ): acorn.OUT
 {
@@ -50,12 +51,16 @@ export default function parse (
         else if ( code.type === "VariableDeclaration" )
         {
             out.cash.code = ""
-            out.code += variable( code, out, conversion.Variable ).cash.code
+            out.code += variable( code, out, conversion.Variable ).out.cash.code
         } else if ( code.type === "IfStatement" )
         {
             out.cash.code = ""
             out.code += IF( code, out, { IF: conversion.IF } ).cash.code
 
+        } else if ( code.type === "ForStatement" )
+        {
+            out.cash = Out.cleanCash( out )
+            out = For( code, out, { For: conversion.For, Kind: conversion.Variable.Kind } )
         }
     }
     out.code = out.cash.Function + out.code

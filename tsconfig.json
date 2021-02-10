@@ -5,8 +5,8 @@
   ],
   "compilerOptions": {
     "outDir": "build_core",
-    "target": "es6",
-    "module": "es2020",
+    "target": "esnext",
+    "module": "esnext",
     "jsx": "react",
     "noEmit": false,
     "removeComments": true,

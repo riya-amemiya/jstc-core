@@ -5,7 +5,9 @@ import print from "./parse/modules/print/main"
 import Function from "./parse/modules/function/main"
 import IF from "./parse/modules/if/main"
 import ruby from './parse/modes/ruby';
+import Binary from "./parse/modules/Binary/main"
 import parse from './parse/parse';
+import For from "./parse/modules/for/main"
 import { Out } from "./parse/out"
 /**
      *
@@ -42,4 +44,19 @@ function read ( file: string ): string
     }
     return "";
 }
-export { check, read, python, variable, print, Function, ruby, IF, parse, Out }
+
+export
+{
+    check,
+    read,
+    python,
+    variable,
+    print,
+    Function,
+    ruby,
+    IF,
+    parse,
+    Out,
+    Binary,
+    For
+}

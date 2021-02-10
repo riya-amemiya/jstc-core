@@ -59,7 +59,7 @@ export default (
                             }
                             else if ( c.expression.arguments[ 0 ].type === "BinaryExpression" )
                             {
-                                out = BinaryExpression( c, out, { BinaryExpression: conversion.BinaryExpression } )
+                                ( { out } = BinaryExpression( c, out, { BinaryExpression: conversion.BinaryExpression } ) )
                             } else if ( c.expression.arguments[ 0 ].type === "Identifier" )
                             {
                                 out.cash.code += conversion.Literal( c.expression.arguments[ 0 ].name )
