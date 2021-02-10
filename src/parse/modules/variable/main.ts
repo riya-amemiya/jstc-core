@@ -1,5 +1,10 @@
 import acorn from "../../../../type/type"
 import chalk from "chalk"
+/**
+ * @module Variable
+ * @returns { out: acorn.OUT}
+ * @returns {varible: string[]}
+ */
 export default ( code: acorn.Body3 | acorn.Body, out: acorn.OUT, conversion: { Kind: { let: ( data: string[] ) => string, const: ( data: string[] ) => string } } ): { out: acorn.OUT; varible: string[] } =>
 {
     let varible: string[] = [ "" ]

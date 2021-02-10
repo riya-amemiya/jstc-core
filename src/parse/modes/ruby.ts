@@ -1,7 +1,7 @@
 import acorn from "../../../type/type"
 import { parse, Out } from "../.."
 /**
- * @module python
+ * @module ruby
  * @param {acorn.Node} codes
  * @returns {acorn.OUT} 変換結果を出力
  */
