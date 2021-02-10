@@ -1,13 +1,13 @@
 import acorn from "../../../type/type"
 import { parse, Out } from "../.."
 /**
- * @module python
+ * @module ruby
  * @param {acorn.Node} codes
  * @returns {acorn.OUT} 変換結果を出力
  */
-export default function ruby ( codes: acorn.Node, mode: string ): acorn.OUT
+export default function ruby ( codes: acorn.Node, mode: string, option: acorn.OUTOPTION = { optimisation: false } ): acorn.OUT
 {
-    let out: acorn.OUT = Out.clean( {} );
+    let out: acorn.OUT = Out.clean( { mode, option } );
     return (
         parse( {
             codes, out, conversion: {
@@ -30,8 +30,12 @@ export default function ruby ( codes: acorn.Node, mode: string ): acorn.OUT
                 IF: ( data: string[] ) =>
                 {
                     return `if (${ data[ 0 ] }) ${ data[ 1 ] } end\n`;
+                },
+                For: ( data ) =>
+                {
+                    return data[ 2 ]
                 }
-            }, mode
+            }
         } )
     )
 }

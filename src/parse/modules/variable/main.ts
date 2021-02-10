@@ -1,8 +1,13 @@
 import acorn from "../../../../type/type"
 import chalk from "chalk"
-export default ( code: acorn.Body3 | acorn.Body, out: acorn.OUT, conversion: { Kind: { let: ( data: string[] ) => string, const: ( data: string[] ) => string } } ): acorn.OUT =>
+/**
+ * @module Variable
+ * @returns { out: acorn.OUT}
+ * @returns {varible: string[]}
+ */
+export default ( code: acorn.Body3 | acorn.Body, out: acorn.OUT, conversion: { Kind: { let: ( data: string[] ) => string, const: ( data: string[] ) => string } } ): { out: acorn.OUT; varible: string[] } =>
 {
-
+    let varible: string[] = [ "" ]
     if ( code.declarations[ 0 ].type === "VariableDeclarator" )
     {
         let raw = ""
@@ -78,6 +83,7 @@ export default ( code: acorn.Body3 | acorn.Body, out: acorn.OUT, conversion: { K
         }
         if ( code.kind === "let" || code.kind === "var" )
         {
+            varible = [ code.declarations[ 0 ].id.name, raw ]
             out.cash.code += conversion.Kind.let( [ code.declarations[ 0 ].id.name, raw ] )
         }
         else if ( code.kind === "const" )
@@ -86,19 +92,22 @@ export default ( code: acorn.Body3 | acorn.Body, out: acorn.OUT, conversion: { K
             {
                 if ( out.cash.Identifier.findIndex( n => n.to === code.declarations[ 0 ].id.name.toUpperCase() ) === -1 )
                 {
+                    varible = [ code.declarations[ 0 ].id.name.toUpperCase(), raw ]
                     out.cash.code += conversion.Kind.const( [ code.declarations[ 0 ].id.name.toUpperCase(), raw ] )
                     out.cash.Identifier.push( { name: code.declarations[ 0 ].id.name, to: code.declarations[ 0 ].id.name.toUpperCase(), value: code.declarations[ 0 ].init.raw, num: 0 } )
                 } else
                 {
+                    varible = [ `_${ code.declarations[ 0 ].id.name }`, raw ]
                     out.cash.code += conversion.Kind.const( [ `_${ code.declarations[ 0 ].id.name }`, raw ] )
                     out.cash.Identifier.push( { name: code.declarations[ 0 ].id.name, to: `_${ code.declarations[ 0 ].id.name }`, value: code.declarations[ 0 ].init.raw, num: 0 } )
                 }
             } else
             {
+                varible = [ code.declarations[ 0 ].id.name.toUpperCase(), raw ]
                 out.cash.code += conversion.Kind.const( [ code.declarations[ 0 ].id.name.toUpperCase(), raw ] )
                 out.cash.Identifier.push( { name: code.declarations[ 0 ].id.name, to: code.declarations[ 0 ].id.name.toUpperCase(), value: code.declarations[ 0 ].init.raw, num: 0 } )
             }
         }
     }
-    return out
+    return { out, varible }
 }

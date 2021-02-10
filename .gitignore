@@ -1,6 +1,5 @@
 node_modules
 .vscode
-test
 jstc_build
 min
 build

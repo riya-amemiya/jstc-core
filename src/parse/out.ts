@@ -31,17 +31,28 @@ export const Out = {
                         num: 0
                     }
                 ],
-                Function: ""
+                Function: "",
+                Binary: [ {
+                    name: "",
+                    operator: "",
+                    value: ""
+                } ]
             },
             not = [ {
                 name: "",
                 num: 0
-            } ]
+            } ],
+            mode = "",
+            option = {
+                optimisation: false
+            }
         } ): acron.OUT => ( {
-            code: code,
-            ast: ast,
-            cash: cash,
-            not: not
+            code,
+            ast,
+            cash,
+            not,
+            mode,
+            option
         } ),
     /**
      *
@@ -50,7 +61,7 @@ export const Out = {
      */
     cleanCash: ( out: acron.OUT ): acron.OUTCASH =>
     {
-        return { code: "", return: "", Identifier: out.cash.Identifier, Function: out.cash.Function }
+        return { code: "", return: "", Identifier: out.cash.Identifier, Function: out.cash.Function, Binary: out.cash.Binary }
     },
     /**
      *

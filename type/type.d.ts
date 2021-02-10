@@ -10,6 +10,12 @@ declare namespace acorn
         ast: {
             Function: ASTFUNCTION[]
         }
+        mode: string
+        option: OUTOPTION
+    }
+    interface OUTOPTION
+    {
+        optimisation: boolean
     }
     interface OUTCASH
     {
@@ -17,6 +23,11 @@ declare namespace acorn
         return: string;
         Identifier: CASH_IDENTIFIER[]
         Function: string
+        Binary: {
+            name: string;
+            operator: string
+            value: string;
+        }[]
     }
     interface ASTFUNCTION
     {
@@ -78,6 +89,8 @@ declare namespace acorn
         declarations: Declaration[];
         test: Test;
         consequent: Consequent;
+        update: Update;
+        init: Body3;
     }
     interface Consequent
     {
@@ -103,8 +116,19 @@ declare namespace acorn
         kind: string;
         expression: Expression2;
         argument: Argument5;
+        test: Test;
+        update: Update;
+        init: Body3;
     }
-
+    interface Update
+    {
+        type: string;
+        start: number;
+        end: number;
+        operator: string;
+        prefix: boolean;
+        argument: Argument;
+    }
     interface Argument5
     {
         type: string;
@@ -240,10 +264,11 @@ declare namespace acorn
 
     interface Argument
     {
+        declarations: Declaration[]
         type: string;
         start: number;
         end: number;
-        value: number;
+        value: string;
         raw: string;
         arguments: Argument[]
         left: Argument,

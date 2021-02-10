@@ -9,7 +9,7 @@ export default ( c: acorn.Body, out: acorn.OUT, conversion: { VariableDeclaratio
 {
     if ( c.type === "VariableDeclaration" )
     {
-        out = variable( c, out, { Kind: conversion.Kind } )
+        ( { out } = variable( c, out, { Kind: conversion.Kind } ) )
     }
     return out
 }

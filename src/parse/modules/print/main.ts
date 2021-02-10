@@ -15,8 +15,7 @@ export default (
         FunIdentifier: ( data: string[] ) => string,
         Identifier: ( data: string ) => string,
         BinaryExpression: ( data: string[] ) => string
-    },
-    mode: string
+    }
 ): acorn.OUT =>
 {
     if ( code.expression.type === "CallExpression" )
@@ -34,7 +33,7 @@ export default (
                         out = Out.not( out, { name: code.expression.callee.name, num: 0 } )
                         console.log( chalk.red( `警告:${ code.expression.callee.name }は宣言されていません!` ) );
                         out.not[ out.not.findIndex( n => n.name === code.expression.callee.name ) ].num++
-                        if ( mode == "python" || mode == "ruby" )
+                        if ( out.mode == "python" || out.mode == "ruby" )
                         {
                             comment = `#警告:${ code.expression.callee.name }は宣言されていません!`
                         }
