@@ -80,6 +80,15 @@
                 "loose": true,
                 "useBuiltIns": true
             }
+        ],
+        [
+            "@babel/plugin-transform-arrow-functions"
+        ],
+        [
+            "@babel/plugin-transform-classes",
+            {
+                "loose": true
+            }
         ]
     ]
 }

@@ -7,32 +7,7 @@ import { print, variable, Function, IF, Out, For } from ".."
 
 export default function parse (
     { codes, out, conversion }: {
-        codes: acorn.Node; out: acorn.OUT; conversion: {
-            Function: {
-                Literal: ( data: string ) => string
-                BinaryExpression: ( data: string[] ) => string
-                Function: ( data: string[] ) => string
-                VariableDeclaration: ( data: [ string, number ] ) => string
-                Kind: {
-                    let: ( data: string[] ) => string
-                    const: ( data: string[] ) => string
-                }
-            }
-            Print: {
-                Literal: ( data: string ) => string
-                FunIdentifier: ( data: string[] ) => string
-                Identifier: ( data: string ) => string
-                BinaryExpression: ( data: string[] ) => string
-            }
-            Variable: {
-                Kind: {
-                    let: ( data: string[] ) => string
-                    const: ( data: string[] ) => string
-                }
-            }
-            IF: ( data: string[] ) => string
-            For: ( data: [ [ string, string ], [ string, string, string ], string ] ) => string
-        };
+        codes: acorn.Node; out: acorn.OUT; conversion: acorn.CONVERSION;
     } ): acorn.OUT
 {
     for ( const code of codes.body )

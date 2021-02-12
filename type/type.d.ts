@@ -73,6 +73,33 @@ declare namespace acorn
         body: Body3[];
         sourceType: string;
     }
+    interface CONVERSION
+    {
+        Function: {
+            Literal: ( data: string ) => string
+            BinaryExpression: ( data: string[] ) => string
+            Function: ( data: string[] ) => string
+            VariableDeclaration: ( data: [ string, number ] ) => string
+            Kind: {
+                let: ( data: string[] ) => string
+                const: ( data: string[] ) => string
+            }
+        }
+        Print: {
+            Literal: ( data: string ) => string
+            FunIdentifier: ( data: string[] ) => string
+            Identifier: ( data: string ) => string
+            BinaryExpression: ( data: string[] ) => string
+        }
+        Variable: {
+            Kind: {
+                let: ( data: string[] ) => string
+                const: ( data: string[] ) => string
+            }
+        }
+        IF: ( data: string[] ) => string
+        For: ( data: [ [ string, string ], [ string, string, string ], string ] ) => string
+    }
     interface Body3
     {
         type: string;
