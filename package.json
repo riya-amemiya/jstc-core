@@ -8,7 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "typescript": "tsc",
         "babel": " ./node_modules/.bin/babel build_core --extensions '.js' --out-dir build --no-comments --copy-files",
-        "build": "npm run typescript && npm run babel",
+        "build": "npm run typescript && npm run babel && uglifyjs-folder build -o build -e -x .js",
         "start": "npm run build && node build/index.js",
         "typedoc": "typedoc ./src/",
         "deploy": "npm run typedoc && gh-pages -d out",
