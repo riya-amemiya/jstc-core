@@ -7,7 +7,7 @@ import { print, variable, Function, IF, Out, For } from ".."
 
 export default function parse (
     { codes, out, conversion }: {
-        codes: acorn.Node; out: acorn.OUT; conversion: acorn.CONVERSION;
+        codes: any; out: acorn.OUT; conversion: acorn.CONVERSION;
     } ): acorn.OUT
 {
     for ( const code of codes.body )
