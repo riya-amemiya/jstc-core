@@ -1,5 +1,10 @@
 import acorn from "../../../../type/type"
 import { print, Out } from "../../.."
+/**
+ * @param  {acorn.Body3} code
+ * @param  {acorn.OUT} out
+ * @param  {{IF:(data:string[]} conversion
+ */
 export default ( code: acorn.Body3, out: acorn.OUT, conversion: { IF: ( data: string[] ) => string } ): acorn.OUT =>
 {
     let _argument = {

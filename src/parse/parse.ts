@@ -1,15 +1,18 @@
 import acorn from "../../type/type"
 import { print, variable, Function, IF, Out, For } from ".."
+
 /**
  * @module parse
  * @returns {acorn.OUT} 変換結果を出力
  */
-
 export default function parse (
     { codes, out, conversion }: {
-        codes: acorn.Node; out: acorn.OUT; conversion: acorn.CONVERSION;
+        codes: acorn.Node;
+        out: acorn.OUT;
+        conversion: acorn.CONVERSION;
     } ): acorn.OUT
 {
+
     for ( const code of codes.body )
     {
         if ( code.type === "FunctionDeclaration" )

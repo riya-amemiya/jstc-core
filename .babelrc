@@ -89,6 +89,15 @@
             {
                 "loose": true
             }
+        ],
+        [
+            "@babel/plugin-proposal-logical-assignment-operators"
+        ],
+        [
+            "transform-inline-environment-variables"
+        ],
+        [
+            "remove-unused-vars"
         ]
     ]
 }
