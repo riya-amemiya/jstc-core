@@ -1,7 +1,6 @@
 import acorn from "../../../../type/type"
-import { Out } from "../../.."
+import { Out, Binary } from "../../.."
 import VariableDeclaration from "./VariableDeclaration"
-import BinaryExpression from "../Binary/main"
 /**
  * @module functrion
  * @param code
@@ -59,7 +58,7 @@ export default (
                             }
                             else if ( c.expression.arguments[ 0 ].type === "BinaryExpression" )
                             {
-                                ( { out } = BinaryExpression( c, out, { BinaryExpression: conversion.BinaryExpression } ) )
+                                ( { out } = Binary( c, out, { BinaryExpression: conversion.BinaryExpression } ) )
                             } else if ( c.expression.arguments[ 0 ].type === "Identifier" )
                             {
                                 out.cash.code += conversion.Literal( c.expression.arguments[ 0 ].name )

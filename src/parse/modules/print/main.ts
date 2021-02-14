@@ -1,7 +1,7 @@
 import acorn from "../../../../type/type"
 import chalk from "chalk"
-import { Out } from '../../..';
-import Binary from "../Binary/main"
+import { Out, Binary } from '../../..';
+
 /**
  * @module print
  * @param code

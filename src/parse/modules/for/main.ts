@@ -1,6 +1,5 @@
 import acorn from "../../../../type/type"
-import { Out } from '../../out';
-import { variable } from '../../../index';
+import { variable, Out } from '../../../index';
 export default (
     code: acorn.Body3 | acorn.Body,
     out: acorn.OUT,
