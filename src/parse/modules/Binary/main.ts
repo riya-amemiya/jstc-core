@@ -98,7 +98,15 @@ export default ( c: acorn.Body | acorn.Body3, out: acorn.OUT, conversion: { Bina
         t.name = String( Number( t.name ) + Number( t.raw[ 0 ] ) )
         t.raw = t.raw.slice( t.raw.search( /[(+|-|*|%|\/)]/ ) + 1 )
     }
+    if ( out.option.optimisation )
+    {
+        if ( !isNaN( Number( t.raw ) ) )
+        {
+            c.expression.arguments[ 0 ].operator = ""
+            t.raw = ""
+        }
+    }
     out.cash.code += conversion.BinaryExpression( [ t.name, c.expression.arguments[ 0 ].operator, t.raw ] )
-    const Binary = [ t.name, c.expression.arguments[ 0 ].operator, t.raw ]
-    return { out, Binary }
+    const binary = [ t.name, c.expression.arguments[ 0 ].operator, t.raw ]
+    return { out, binary }
 }

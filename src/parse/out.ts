@@ -18,7 +18,19 @@ export const Out = {
                     argument: "",
                     body: "",
                     return: ""
-                } ]
+                } ],
+                codes: {
+                    console: [
+                        {
+                            call: {
+                                object: "",
+                                property: "",
+                                literal: "",
+                                binary: ""
+                            }
+                        }
+                    ]
+                }
             },
             cash = {
                 code: "",

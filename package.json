@@ -14,7 +14,8 @@
         "uglifyjs": "uglifyjs-folder build -o build -e -x .js",
         "typedoc": "typedoc ./src/",
         "deploy": "npm run typedoc && gh-pages -d out",
-        "build_babel": "./node_modules/.bin/babel src --extensions '.ts,.tsx' --out-dir babel --no-comments"
+        "build_babel": "./node_modules/.bin/babel src --extensions '.ts,.tsx' --out-dir babel --no-comments",
+        "clean": "rm -rf build && rm -rf build_core"
     },
     "keywords": [],
     "author": "",

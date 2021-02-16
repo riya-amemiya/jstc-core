@@ -45,7 +45,7 @@ export default (
             {
                 out.cash.code += `${ c.raw },`
             }
-            out.code += `${ code.expression.callee.name }(${ out.cash.code.slice( 0, -1 ) })${ comment }\n`
+            out.cash.code += `${ code.expression.callee.name }(${ out.cash.code.slice( 0, -1 ) })${ comment }\n`
         }
         if ( code.expression.callee.type === "MemberExpression" )
         {
@@ -57,7 +57,7 @@ export default (
                     {
                         if ( argument.type === "Literal" )
                         {
-                            out.code += conversion.Literal( `${ argument.raw }` )
+                            out.cash.code += conversion.Literal( `${ argument.raw }` )
                         }
                         if ( argument.type === "CallExpression" )
                         {
@@ -77,7 +77,7 @@ export default (
                                     }
                                     _argument.out += `${ _argument.name[ i ] }${ t }`
                                 }
-                                out.code += conversion.FunIdentifier( [ argument.callee.name, _argument.out ] )
+                                out.cash.code += conversion.FunIdentifier( [ argument.callee.name, _argument.out ] )
                             }
                         }
                         if ( argument?.type === "Identifier" )
@@ -86,30 +86,30 @@ export default (
                             {
                                 if ( out.cash.Identifier.findIndex( n => n.to === argument.name ) === -1 )
                                 {
-                                    out.code += conversion.Identifier( argument.name.toUpperCase() )
+                                    out.cash.code += conversion.Identifier( argument.name.toUpperCase() )
                                 }
                                 else
                                 {
                                     out.cash.Identifier.push( { name: `_${ argument.name }`, to: `_${ argument.name }`, value: String( argument.value ), num: 0 } )
-                                    out.code += conversion.Identifier( `_${ argument.name }` )
+                                    out.cash.code += conversion.Identifier( `_${ argument.name }` )
                                 }
                             }
                             else
                             {
-                                out.code += conversion.Identifier( argument.name )
+                                out.cash.code += conversion.Identifier( argument.name )
                                 // out.cash.Identifier.push( { name: `_${ argument.name }`, to: `_${ argument.name }`, value: String( argument.value ), num: 0 } )
-                                // out.code += conversion.Identifier( `_${ argument.name }` )
+                                // out.cash.code += conversion.Identifier( `_${ argument.name }` )
                             }
                         }
                         if ( argument?.type === "MemberExpression" )
                         {
-                            out.code += conversion.Identifier( `${ argument.object.name }[${ argument.property?.raw || `"${ argument.property?.name }"` }]` )
+                            out.cash.code += conversion.Identifier( `${ argument.object.name }[${ argument.property?.raw || `"${ argument.property?.name }"` }]` )
                         }
                         if ( argument?.type === "BinaryExpression" )
                         {
-                            let a = Out.clean( { cash: Out.cleanCash( out ) } )
+                            let a = Out.clean( { cash: Out.cleanCash( out ), option: out.option } )
                             Binary( code, a, { BinaryExpression: conversion.BinaryExpression } )
-                            out.code += a.cash.code
+                            out.cash.code += a.cash.code
                         }
                     }
                 }

@@ -5,6 +5,7 @@
   ],
   "compilerOptions": {
     "outDir": "build_core",
+    //"outFile": "./build_core/index.js",
     "target": "esnext",
     "module": "esnext",
     "jsx": "react",

@@ -37,11 +37,7 @@ function check ( file: string ): boolean
  */
 function read ( file: string ): string
 {
-    if ( check( file ) )
-    {
-        return fs.readFileSync( file, 'utf8' );
-    }
-    return "";
+    return check( file ) ? fs.readFileSync( file, 'utf8' ) : "";
 }
 
 export

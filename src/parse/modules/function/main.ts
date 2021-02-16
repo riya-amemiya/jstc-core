@@ -1,5 +1,5 @@
 import acorn from "../../../../type/type"
-import { Out, Binary } from "../../.."
+import { Out, print } from "../../.."
 import VariableDeclaration from "./VariableDeclaration"
 /**
  * @module functrion
@@ -20,7 +20,6 @@ export default (
         }
     } ): acorn.OUT =>
 {
-    out.cash = Out.cleanCash( out )
     let argument: { name: string[], out: string } = { name: [], out: "" }
     for ( const params of code.params )
     {
@@ -43,7 +42,13 @@ export default (
         }
         if ( c.type === "ExpressionStatement" )
         {
-            if ( c.expression.type === "CallExpression" )
+            out = print( c, out, {
+                Literal: conversion.Literal,
+                FunIdentifier: ( data: string[] ): string => `print(${ data[ 0 ] }(${ data[ 1 ] }));`,
+                Identifier: conversion.Literal,
+                BinaryExpression: conversion.BinaryExpression
+            } )
+            /*if ( c.expression.type === "CallExpression" )
             {
                 if ( c.expression.callee.type === "MemberExpression" )
                 {
@@ -51,6 +56,7 @@ export default (
                     {
                         if ( c.expression.callee.property.name === "log" )
                         {
+                            let binary: string[] = [ "" ]
                             if ( c.expression.arguments[ 0 ].type === "Literal" )
                             {
                                 //out.cash.code += `print("${c.expression.arguments[0].value}");`
@@ -58,15 +64,23 @@ export default (
                             }
                             else if ( c.expression.arguments[ 0 ].type === "BinaryExpression" )
                             {
-                                ( { out } = Binary( c, out, { BinaryExpression: conversion.BinaryExpression } ) )
+                                ( { out, binary } = Binary( c, out, { BinaryExpression: conversion.BinaryExpression } ) )
                             } else if ( c.expression.arguments[ 0 ].type === "Identifier" )
                             {
                                 out.cash.code += conversion.Literal( c.expression.arguments[ 0 ].name )
                             }
+                            out.ast.codes.console.push( {
+                                call: {
+                                    object: c.expression.callee.object.name,
+                                    property: c.expression.callee.property.name,
+                                    literal: c.expression.arguments[ 0 ]?.value ? `${ c.expression.arguments[ 0 ].value }` : "",
+                                    binary: binary[ 0 ] ? `${ binary[ 0 ] }${ binary[ 1 ] }${ binary[ 2 ] }` : ""
+                                }
+                            } )
                         }
                     }
                 }
-            }
+            }*/
         }
         if ( c.type === "ReturnStatement" )
         {

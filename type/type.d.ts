@@ -9,9 +9,24 @@ declare namespace acorn
         not: OUTNOT[]
         ast: {
             Function: ASTFUNCTION[]
+            codes: ASTCODES
         }
         mode: string
         option: OUTOPTION
+    }
+    interface ASTCODES
+    {
+        console: ASTCONSOLE[]
+
+    }
+    interface ASTCONSOLE
+    {
+        call: {
+            object: string
+            property: string
+            literal: string
+            binary: string
+        }
     }
     interface OUTOPTION
     {
