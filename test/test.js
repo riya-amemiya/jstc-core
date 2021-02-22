@@ -7,4 +7,4 @@ for (let i = 1; i < 10; i++) {
     console.log(i);
 }
 console.log("Hello")
-console.log(2 + 9 + 5 + 8 + 9);
+console.log(2 + 9 - 5 + 8 + 9);

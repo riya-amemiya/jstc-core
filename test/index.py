@@ -3,4 +3,4 @@ for i in range(10):
 	if(i+1<10):
 		print(i+1);
 print("Hello")
-print(2+9+5+8+9)
+print(2+9-5+8+9)

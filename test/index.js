@@ -1,1 +1,2 @@
-require("./main").default().then(num => num && console.error("エラー発生"))
+"use strict";
+require("./main").default().then(function(a) { return a && console.error("エラー発生"); });

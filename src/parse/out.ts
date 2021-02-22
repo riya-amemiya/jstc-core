@@ -9,66 +9,67 @@ export const Out = {
      * @param param0
      * @returns {acron.OUT} 全て初期化
      */
-    clean: (
-        {
-            code = "",
-            ast = {
-                Function: [ {
-                    name: "",
-                    argument: "",
-                    body: "",
-                    return: ""
-                } ],
-                codes: {
-                    console: [
-                        {
-                            call: {
-                                object: "",
-                                property: "",
-                                literal: "",
-                                binary: ""
-                            }
-                        }
-                    ]
-                }
-            },
-            cash = {
-                code: "",
-                return: "",
-                Identifier: [
-                    {
-                        name: "",
-                        to: "",
-                        value: "",
-                        num: 0
-                    }
-                ],
-                Function: "",
-                Binary: [ {
-                    name: "",
-                    operator: "",
-                    value: ""
-                } ]
-            },
-            not = [ {
+    clean: ( {
+        code = "",
+        ast = {
+            Function: [ {
                 name: "",
-                num: 0
+                argument: "",
+                body: "",
+                return: ""
             } ],
-            mode = "",
-            option = {
-                optimisation: false
+            codes: {
+                console: [
+                    {
+                        call: {
+                            object: "",
+                            property: "",
+                            literal: "",
+                            binary: ""
+                        }
+                    }
+                ]
             }
-        } ): acron.OUT => ( {
+        },
+        cash = {
+            code: "",
+            return: "",
+            Identifier: [
+                {
+                    name: "",
+                    to: "",
+                    value: "",
+                    num: 0
+                }
+            ],
+            Function: "",
+            Binary: [ {
+                name: "",
+                operator: "",
+                value: ""
+            } ]
+        },
+        not = [ {
+            name: "",
+            num: 0
+        } ],
+        mode = "",
+        option = {
+            optimisation: false
+        }
+    } ): acron.OUT =>
+    {
+        return ( {
             code,
             ast,
             cash,
             not,
             mode,
             option
-        } ),
+        } )
+    },
     /**
-     *
-     * @param out
+     * @param  {acron.OUT} out
      * @returns {acron.OUTCASH} Cashのみ初期化
      */
     cleanCash: ( out: acron.OUT ): acron.OUTCASH =>
@@ -87,7 +88,6 @@ export const Out = {
         return out
     },
     /**
-     *
      * @param out
      * @param data
      * @returns {acron.OUT} notのみ初期化

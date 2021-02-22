@@ -35,10 +35,7 @@ function check ( file: string ): boolean
  * @param {string} file
  * @returns {string} 読み込んだ結果をstringで返す
  */
-function read ( file: string ): string
-{
-    return check( file ) ? fs.readFileSync( file, 'utf8' ) : "";
-}
+const read = ( file: string ): string => check( file ) ? fs.readFileSync( file, 'utf8' ) : "";
 
 export
 {

@@ -107,8 +107,8 @@ export default (
                         }
                         if ( argument?.type === "BinaryExpression" )
                         {
-                            let a = Out.clean( { cash: Out.cleanCash( out ), option: out.option } )
-                            Binary( code, a, { BinaryExpression: conversion.BinaryExpression } )
+                            let a = Out.clean( { cash: Out.cleanCash( out ), option: out.option } );
+                            ( { out: a } = Binary( code, a, { BinaryExpression: conversion.BinaryExpression } ) )
                             out.cash.code += a.cash.code
                         }
                     }
