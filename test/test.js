@@ -1,4 +1,4 @@
-function name() {
+function Name() {
     console.log("a");
     let a = 1
     console.log(1 + 2 + 3 + a + 9 + 100);
@@ -6,5 +6,7 @@ function name() {
 for (let i = 1; i < 10; i++) {
     console.log(i);
 }
+const a = 0;
+Name(a)
 console.log("Hello")
 console.log(2 + 9 - 5 + 8 + 9);

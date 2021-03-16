@@ -4,7 +4,7 @@
     "type"
   ],
   "compilerOptions": {
-    "outDir": "build_core",
+    "outDir": "build",
     //"outFile": "./build_core/index.js",
     "target": "esnext",
     "module": "esnext",

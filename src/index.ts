@@ -1,44 +1,42 @@
-import fs from 'fs'
-import variable from "./parse/modules/variable/main"
-import print from "./parse/modules/print/main"
-import Function from "./parse/modules/function/main"
-import IF from "./parse/modules/if/main"
-import Binary from "./parse/modules/Binary/main"
+import fs from 'fs';
+import variable from './parse/modules/variable/main';
+import print from './parse/modules/print/main';
+import Function from './parse/modules/function/main';
+import IF from './parse/modules/if/main';
+import Binary from './parse/modules/Binary/main';
 import parse from './parse/parse';
-import For from "./parse/modules/for/main"
-import { Out } from "./parse/out"
+import For from './parse/modules/for/main';
+import { Out } from './parse/out';
 import python from './parse/modes/python';
 import ruby from './parse/modes/ruby';
 /**
-     *
-     * @module check
-     * @param {string} file
-     * ファイルがあるかチェック
-     * @returns {boolean} あったらtureなかったらfalse
-     */
-function check ( file: string ): boolean
-{
+ *
+ * @module check
+ * @param {string} file
+ * ファイルがあるかチェック
+ * @returns {boolean} あったらtureなかったらfalse
+ */
+const check = (file: string): boolean => {
     let hasfaile = false;
-    try
-    {
-        fs.statSync( file );
+    try {
+        fs.statSync(file);
         hasfaile = true;
-    } catch ( err )
-    {
+    } catch (err) {
         hasfaile = false;
     }
     return hasfaile;
-}
+};
 /**
  *
  * @module read
  * @param {string} file
  * @returns {string} 読み込んだ結果をstringで返す
  */
-const read = ( file: string ): string => check( file ) ? fs.readFileSync( file, 'utf8' ) : "";
+const read = (file: string): string => {
+    return check(file) ? fs.readFileSync(file, 'utf8') : '';
+};
 
-export
-{
+export {
     check,
     read,
     python,
@@ -50,5 +48,5 @@ export
     parse,
     Out,
     Binary,
-    For
-}
+    For,
+};

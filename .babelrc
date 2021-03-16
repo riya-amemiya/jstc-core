@@ -107,9 +107,6 @@
             "transform-inline-environment-variables"
         ],
         [
-            "remove-unused-vars"
-        ],
-        [
             "@babel/plugin-proposal-nullish-coalescing-operator"
         ],
         [
