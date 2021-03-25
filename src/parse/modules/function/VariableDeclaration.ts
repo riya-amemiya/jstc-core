@@ -18,7 +18,11 @@ export default (
     },
 ): acorn.CASH => {
     if (c.type === 'VariableDeclaration') {
-        ({ out } = variable(c, out, { Kind: conversion.Kind }));
+        ({ out } = variable({
+            code: c,
+            out,
+            conversion: { Kind: conversion.Kind },
+        }));
     }
     return out;
 };

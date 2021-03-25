@@ -40,12 +40,16 @@ export default (
             }).cash.code;
         }
         if (c.type === 'ExpressionStatement') {
-            out = print(c, out, {
-                Literal: conversion.Literal,
-                FunIdentifier: (data: string[]): string =>
-                    `print(${data[0]}(${data[1]}));`,
-                Identifier: conversion.Literal,
-                BinaryExpression: conversion.BinaryExpression,
+            out = print({
+                code: c,
+                out,
+                conversion: {
+                    Literal: conversion.Literal,
+                    FunIdentifier: (data: string[]): string =>
+                        `print(${data[0]}(${data[1]}));`,
+                    Identifier: conversion.Literal,
+                    BinaryExpression: conversion.BinaryExpression,
+                },
             });
         }
         if (c.type === 'ReturnStatement') {

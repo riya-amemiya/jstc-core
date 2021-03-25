@@ -17,8 +17,12 @@ export default (
     let varible: string[] = [''];
     let t = { name: '', raw: '' };
     if (code.init.declarations[0].type == 'VariableDeclarator') {
-        ({ out, varible } = variable(code.init, out, {
-            Kind: conversion.Kind,
+        ({ out, varible } = variable({
+            code: code.init,
+            out,
+            conversion: {
+                Kind: conversion.Kind,
+            },
         }));
     }
     if (code.test.type === 'BinaryExpression') {

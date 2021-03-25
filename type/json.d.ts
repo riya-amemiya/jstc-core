@@ -1,6 +1,5 @@
-declare module "*/package.json" {
-    interface RootObject
-    {
+declare module '*/package.json' {
+    interface RootObject {
         name: string;
         version: string;
         description: string;
@@ -14,13 +13,11 @@ declare module "*/package.json" {
         bin: Bin;
     }
 
-    interface Bin
-    {
+    interface Bin {
         jstc: string;
     }
 
-    interface Dependencies
-    {
+    interface Dependencies {
         acorn: string;
         'acorn-loose': string;
         'acorn-node': string;
@@ -28,8 +25,7 @@ declare module "*/package.json" {
         tslib: string;
     }
 
-    interface DevDependencies
-    {
+    interface DevDependencies {
         '@babel/cli': string;
         '@babel/core': string;
         '@babel/plugin-proposal-class-properties': string;
@@ -41,8 +37,7 @@ declare module "*/package.json" {
         typescript: string;
     }
 
-    interface Scripts
-    {
+    interface Scripts {
         test: string;
         typescript: string;
         babel: string;
@@ -50,5 +45,5 @@ declare module "*/package.json" {
         start: string;
     }
     const json: RootObject;
-    export = json
+    export = json;
 }

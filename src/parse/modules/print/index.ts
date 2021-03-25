@@ -7,16 +7,17 @@ import { Out, Binary } from '../../..';
  * @param code
  * @param out
  */
-export default (
-    code: acorn.Body3 | acorn.Body,
-    out: acorn.OUT,
-    conversion: {
+interface Props {
+    readonly code: acorn.Body3 | acorn.Body;
+    readonly out: acorn.OUT;
+    readonly conversion: {
         Literal: (data: string) => string;
         FunIdentifier: (data: string[]) => string;
         Identifier: (data: string) => string;
         BinaryExpression: (data: string[]) => string;
-    },
-): acorn.OUT => {
+    };
+}
+export default ({ code, out, conversion }: Props): acorn.OUT => {
     if (code.expression.type === 'CallExpression') {
         if (code.expression.callee.type == 'Identifier') {
             let has = {

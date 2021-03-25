@@ -21,13 +21,25 @@ export default function parse({
     for (const code of codes.body) {
         out.cash = Out.cleanCash(out);
         if (code.type === 'ExpressionStatement') {
-            out.code += print(code, out, conversion.Print).cash.code;
+            out.code += print({
+                code,
+                out,
+                conversion: conversion.Print,
+            }).cash.code;
         } else if (code.type === 'VariableDeclaration') {
             out.cash.code = '';
-            out.code += variable(code, out, conversion.Variable).out.cash.code;
+            out.code += variable({
+                code,
+                out,
+                conversion: conversion.Variable,
+            }).out.cash.code;
         } else if (code.type === 'IfStatement') {
             out.cash.code = '';
-            out.code += IF(code, out, { IF: conversion.IF }).cash.code;
+            out.code += IF({
+                code,
+                out,
+                conversion: { IF: conversion.IF },
+            }).cash.code;
         } else if (code.type === 'ForStatement') {
             out.cash = Out.cleanCash(out);
             out = For(code, out, {

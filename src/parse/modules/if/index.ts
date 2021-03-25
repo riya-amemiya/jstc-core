@@ -1,15 +1,16 @@
 import acorn from '../../../../type/type';
 import { print, Out } from '../../..';
+interface Props {
+    code: acorn.Body3;
+    out: acorn.OUT;
+    conversion: { IF: (data: string[]) => string };
+}
 /**
  * @param  {acorn.Body3} code
  * @param  {acorn.OUT} out
  * @param  {{IF:(data:string[]} conversion
  */
-export default (
-    code: acorn.Body3,
-    out: acorn.OUT,
-    conversion: { IF: (data: string[]) => string },
-): acorn.OUT => {
+export default ({ code, out, conversion }: Props): acorn.OUT => {
     let _argument = {
         BinaryExpression: '',
         out: Out.clean({ cash: Out.cleanCash(out) }),
@@ -45,13 +46,17 @@ export default (
             _argument.BinaryExpression += code.test.right.raw;
         }
         for (const c of code.consequent.body) {
-            _argument.out = print(c, _argument.out, {
-                Literal: (data: string): string => `print(${data});`,
-                FunIdentifier: (data: string[]): string =>
-                    `print(${data[0]}(${data[1]}));`,
-                Identifier: (data: string): string => `print(${data});`,
-                BinaryExpression: (data: string[]): string =>
-                    `print(${data[0]}${data[1]}${data[2]});`,
+            _argument.out = print({
+                code: c,
+                out: _argument.out,
+                conversion: {
+                    Literal: (data: string): string => `print(${data});`,
+                    FunIdentifier: (data: string[]): string =>
+                        `print(${data[0]}(${data[1]}));`,
+                    Identifier: (data: string): string => `print(${data});`,
+                    BinaryExpression: (data: string[]): string =>
+                        `print(${data[0]}${data[1]}${data[2]});`,
+                },
             });
         }
     }
